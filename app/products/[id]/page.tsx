@@ -23,9 +23,10 @@ type Product = {
 // helper function
 const getProduct = async (id: string) => {
   const res = await fetch(`https://dummyjson.com/products/${id}`, {
-    next: { revalidate: 10 },
+    next: { revalidate: 30 },
   });
   const product: Product = await res.json();
+  console.log('FETCHING DATA NEW', product);
   return product;
 };
 
