@@ -15,7 +15,6 @@ const getProduct = async (id: string) => {
     next: { revalidate: 30 },
   });
   const product: Product = await res.json();
-  console.log('FETCHING DATA NEW', product);
   return product;
 };
 
