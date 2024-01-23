@@ -1,3 +1,5 @@
+import { Product } from "@/typings";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type PageProps = {
@@ -6,19 +8,6 @@ type PageProps = {
   };
 };
 
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
 
 // helper function
 const getProduct = async (id: string) => {
@@ -32,6 +21,9 @@ const getProduct = async (id: string) => {
 
 async function ProductPage({ params: { id } }: PageProps) {
   const product = await getProduct(id);
+
+  if(!product.id) return notFound()
+
   return (
     <div>
       <h1>I am a single product {product.id}</h1>
