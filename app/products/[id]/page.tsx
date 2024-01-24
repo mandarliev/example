@@ -11,9 +11,8 @@ type PageProps = {
 
 // helper function
 const getProduct = async (id: string) => {
-  const res = await fetch(`https://dummyjson.com/products/${id}`, {
-    next: { revalidate: 30 },
-  });
+  const res = await fetch(`https://dummyjson.com/products/${id}`
+  );
   const product: Product = await res.json();
   return product;
 };
@@ -30,20 +29,6 @@ async function ProductPage({ params: { id } }: PageProps) {
       <h3>{product.price}</h3>
     </div>
   );
-}
-
-const getProducts = async () => {
-  const res = await fetch(`https://dummyjson.com/products`);
-  const data = await res.json();
-  return data.products;
-};
-
-export async function generateStaticParams() {
-  const products: Product[] = await getProducts();
-
-  return products.map((product) => ({
-    id: String(product.id),
-  }));
 }
 
 export default ProductPage;

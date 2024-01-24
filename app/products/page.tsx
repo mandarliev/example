@@ -1,6 +1,7 @@
 import { Product } from "@/typings";
 import Link from "next/link";
 import React from "react";
+import ProductList from "../ProductList";
 
 const getProducts = async () => {
   const res = await fetch(`https://dummyjson.com/products`);
@@ -13,18 +14,7 @@ async function ProductsPage() {
   return (
     <div>
       <h1>List of products</h1>
-      <div className="flex flex-col space-y-5 p-10">
-        {products.map((product) => (
-          <Link
-            key={product.id}
-            className="p-5 bg-gray-200 border border-green-400"
-            href={`/products/${product.id}`}
-          >
-            <h2>{product.title}</h2>
-            <h3>{product.price}</h3>
-          </Link>
-        ))}
-      </div>
+      <ProductList />
     </div>
   );
 }
